@@ -5,7 +5,10 @@ import ifgram.dto.UserResponse;
 import ifgram.model.User;
 import ifgram.repository.UserRepository;
 import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
+
+@Service
 public class UserService {
     private final UserRepository repository;
 
@@ -16,6 +19,7 @@ public class UserService {
     @Transactional
     public UserResponse criar(UserRequest request) {
     if (repository.existsByEmail(request.email())) {
+        throw new RuntimeException("E-mail já cadastrado!");
 
     }
 
